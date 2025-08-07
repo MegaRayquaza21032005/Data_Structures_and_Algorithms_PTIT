@@ -1,0 +1,63 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+#define ll long long
+#define fast ios_base::sync_with_stdio(false); cin.tie(NULL); cout.tie(NULL);
+#define endl "\n"
+const int mod = 1e9 + 7;
+
+int a[1009], n, k, final = 0;
+void init()
+{
+    final = 0;
+    for(int i = 1; i <= k; ++i) cin >> a[i];
+}
+void generate()
+{
+    int i = k;
+    while(a[i - 1] + 1 == a[i] && i >= 1)
+    {
+        --i;
+    }
+    if(i == 0) 
+    {
+        final = 1;
+    }
+    else
+    {
+        a[i]--;
+        for(int j = i + 1; j <= k; ++j)
+        {
+            a[j] = n - k + j;
+        }
+    }
+}
+int main()
+{
+    fast;
+    int t = 1;
+    cin >> t;
+    while(t--)
+    {
+        cin >> n >> k;
+        init();
+        generate();
+        if(final == 1)
+        {
+            for(int i = 1; i <= k; ++i)
+            {
+                cout << n - k + i << " ";
+            }
+            cout << endl;
+        }
+        else
+        {
+            for(int i = 1; i <= k; ++i)
+            {
+                cout << a[i] << " ";
+            }
+            cout << endl;
+        }
+    }
+    return 0;
+}
